@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h3>Add/Update Employee</h3>
+            <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                <div class="form-group">
+                    <label for="employeeName">Name</label>
+                    <input type="text" class="form-control" name="employeeName" [(ngModel)]="model.employeeName"
+                        #employeeName="ngModel" 
+                        required />
+                    <div *ngIf="f.submitted && employeeName.invalid" class="invalid-feedback">
+                        <div *ngIf="employeeName.errors?.required">Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="employeeAge">Age</label>
+                    <input type="text" class="form-control" name="employeeAge" [(ngModel)]="model.employeeAge"
+                        #employeeAge="ngModel" 
+                        required />
+                    <div *ngIf="f.submitted && employeeAge.invalid" class="invalid-feedback">
+                        <div *ngIf="employeeAge.errors?.required">Age is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="employeeAddress">Address</label>
+                    <textarea type="text" class="form-control" name="employeeAddress"
+                        [(ngModel)]="model.employeeAddress" #employeeAddress="ngModel"
+                       required> </textarea>
+                    <div *ngIf="f.submitted && employeeAddress.invalid" class="invalid-feedback">
+                        <div *ngIf="employeeAddress.errors?.required">Address is required</div>
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                    <button (click)="reset(f    )" class="btn btn-primary mr-2"> Cancel</button>
+                    <button class="btn btn-primary">Add/Update Employee</button>
+                </div>
+            </form>
+            <br />
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="text-center">
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of employees; let i = index">
+                        <td>{{item.employeeName}}</td>
+                        <td>{{item.employeeAge}}</td>
+                        <td>{{item.employeeAddress}}</td>
+                        <td class="text-center">
+                            <button (click)="update(item)" class="btn btn-info mr-2">Update</button>
+                            <button (click)="delete(item)" class="btn btn-danger">Delete</button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
